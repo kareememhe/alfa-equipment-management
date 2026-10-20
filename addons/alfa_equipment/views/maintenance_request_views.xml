@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Adds approval buttons and an Approval section to the request form -->
+    <record id="maintenance_request_form_alfa" model="ir.ui.view">
+        <field name="name">maintenance.request.form.alfa</field>
+        <field name="model">maintenance.request</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_request_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="action_submit_for_approval" type="object"
+                        string="Submit for Approval" class="btn-primary"
+                        invisible="approval_state not in ('draft', 'rejected')"/>
+                <button name="action_approve" type="object"
+                        string="Approve" class="btn-success"
+                        invisible="approval_state != 'to_approve'"
+                        groups="maintenance.group_equipment_manager"/>
+                <button name="action_reject" type="object"
+                        string="Reject" class="btn-danger"
+                        invisible="approval_state != 'to_approve'"
+                        groups="maintenance.group_equipment_manager"/>
+            </xpath>
+            <xpath expr="//sheet" position="inside">
+                <group string="Approval" name="alfa_approval">
+                    <group>
+                        <field name="approval_state" widget="badge"
+                               decoration-info="approval_state == 'draft'"
+                               decoration-warning="approval_state == 'to_approve'"
+                               decoration-success="approval_state == 'approved'"
+                               decoration-danger="approval_state == 'rejected'"/>
+                        <field name="approved_by_id" invisible="not approved_by_id"/>
+                        <field name="approval_date" invisible="not approval_date"/>
+                    </group>
+                    <group>
+                        <field name="rejection_reason"
+                               placeholder="Required when rejecting"
+                               invisible="approval_state not in ('to_approve', 'rejected')"
+                               readonly="approval_state != 'to_approve'"/>
+                        <field name="report_source" invisible="report_source != 'qr'"/>
+                        <field name="reported_by_name" invisible="not reported_by_name"/>
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

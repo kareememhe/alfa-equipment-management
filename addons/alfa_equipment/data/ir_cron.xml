@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Daily job: refresh calibration statuses and create reminders -->
+    <record id="ir_cron_calibration_alerts" model="ir.cron">
+        <field name="name">Alfa: Calibration alerts</field>
+        <field name="model_id" ref="maintenance.model_maintenance_equipment"/>
+        <field name="state">code</field>
+        <field name="code">model._cron_calibration_alerts()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="active" eval="True"/>
+    </record>
+</odoo>

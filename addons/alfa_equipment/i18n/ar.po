@@ -1,0 +1,233 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* alfa_equipment
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+#. module: alfa_equipment
+#: model:ir.model.fields,field_description:alfa_equipment.field_maintenance_equipment__calibration_required
+msgid "Requires Calibration"
+msgstr "يتطلب معايرة"
+
+#. module: alfa_equipment
+#: model:ir.model.fields,field_description:alfa_equipment.field_maintenance_equipment__calibration_interval
+msgid "Calibration Interval (months)"
+msgstr "فترة المعايرة (بالأشهر)"
+
+#. module: alfa_equipment
+#: model:ir.model.fields,field_description:alfa_equipment.field_maintenance_equipment__last_calibration_date
+msgid "Last Calibration"
+msgstr "آخر معايرة"
+
+#. module: alfa_equipment
+#: model:ir.model.fields,field_description:alfa_equipment.field_maintenance_equipment__next_calibration_date
+msgid "Next Calibration"
+msgstr "المعايرة القادمة"
+
+#. module: alfa_equipment
+#: model:ir.model.fields,field_description:alfa_equipment.field_maintenance_equipment__calibration_status
+#: model_terms:ir.ui.view,arch_db:alfa_equipment.view_equipment_calibration_graph
+msgid "Calibration Status"
+msgstr "حالة المعايرة"
+
+#. module: alfa_equipment
+#: model:ir.model.fields,field_description:alfa_equipment.field_maintenance_equipment__qr_token
+msgid "QR Token"
+msgstr "معرّف رمز QR"
+
+#. module: alfa_equipment
+#: model:ir.model.fields,field_description:alfa_equipment.field_maintenance_equipment__qr_url
+msgid "Fault Report Link"
+msgstr "رابط الإبلاغ عن عطل"
+
+#. module: alfa_equipment
+#: model:ir.model.fields,field_description:alfa_equipment.field_maintenance_equipment__qr_image
+#: model:ir.model.fields.selection,name:alfa_equipment.selection__maintenance_request__report_source__qr
+#: model_terms:ir.ui.view,arch_db:alfa_equipment.maintenance_equipment_form_alfa
+msgid "QR Code"
+msgstr "رمز QR"
+
+#. module: alfa_equipment
+#: model:ir.model.fields,field_description:alfa_equipment.field_maintenance_request__approval_state
+#: model_terms:ir.ui.view,arch_db:alfa_equipment.maintenance_request_form_alfa
+msgid "Approval"
+msgstr "الاعتماد"
+
+#. module: alfa_equipment
+#: model:ir.model.fields,field_description:alfa_equipment.field_maintenance_request__approved_by_id
+msgid "Approved By"
+msgstr "اعتُمد بواسطة"
+
+#. module: alfa_equipment
+#: model:ir.model.fields,field_description:alfa_equipment.field_maintenance_request__approval_date
+msgid "Approval Date"
+msgstr "تاريخ الاعتماد"
+
+#. module: alfa_equipment
+#: model:ir.model.fields,field_description:alfa_equipment.field_maintenance_request__rejection_reason
+msgid "Rejection Reason"
+msgstr "سبب الرفض"
+
+#. module: alfa_equipment
+#: model:ir.model.fields,field_description:alfa_equipment.field_maintenance_request__reported_by_name
+msgid "Reported By"
+msgstr "المُبلِّغ"
+
+#. module: alfa_equipment
+#: model:ir.model.fields,field_description:alfa_equipment.field_maintenance_request__report_source
+msgid "Source"
+msgstr "المصدر"
+
+#. module: alfa_equipment
+#: model:ir.model.fields.selection,name:alfa_equipment.selection__maintenance_equipment__calibration_status__ok
+msgid "Valid"
+msgstr "صالحة"
+
+#. module: alfa_equipment
+#: model:ir.model.fields.selection,name:alfa_equipment.selection__maintenance_equipment__calibration_status__due_soon
+msgid "Due Soon"
+msgstr "تستحق قريباً"
+
+#. module: alfa_equipment
+#: model:ir.model.fields.selection,name:alfa_equipment.selection__maintenance_equipment__calibration_status__overdue
+msgid "Overdue"
+msgstr "متأخرة"
+
+#. module: alfa_equipment
+#: model:ir.model.fields.selection,name:alfa_equipment.selection__maintenance_equipment__calibration_status__never
+msgid "Never Calibrated"
+msgstr "لم تُعاير مطلقاً"
+
+#. module: alfa_equipment
+#: model:ir.model.fields.selection,name:alfa_equipment.selection__maintenance_request__approval_state__draft
+msgid "Draft"
+msgstr "مسودة"
+
+#. module: alfa_equipment
+#: model:ir.model.fields.selection,name:alfa_equipment.selection__maintenance_request__approval_state__to_approve
+msgid "Waiting Approval"
+msgstr "بانتظار الاعتماد"
+
+#. module: alfa_equipment
+#: model:ir.model.fields.selection,name:alfa_equipment.selection__maintenance_request__approval_state__approved
+msgid "Approved"
+msgstr "معتمد"
+
+#. module: alfa_equipment
+#: model:ir.model.fields.selection,name:alfa_equipment.selection__maintenance_request__approval_state__rejected
+msgid "Rejected"
+msgstr "مرفوض"
+
+#. module: alfa_equipment
+#: model:ir.model.fields.selection,name:alfa_equipment.selection__maintenance_request__report_source__internal
+msgid "Internal"
+msgstr "داخلي"
+
+#. module: alfa_equipment
+#: model_terms:ir.ui.view,arch_db:alfa_equipment.maintenance_equipment_form_alfa
+#: model_terms:ir.ui.view,arch_db:alfa_equipment.view_equipment_calibration_list
+msgid "Calibration"
+msgstr "المعايرة"
+
+#. module: alfa_equipment
+#: model_terms:ir.ui.view,arch_db:alfa_equipment.maintenance_equipment_form_alfa
+msgid "Staff scan this code to report a fault without logging in. Print a label from the Print menu."
+msgstr "يمسح الموظفون هذا الرمز للإبلاغ عن عطل دون تسجيل الدخول. يمكنك طباعة ملصق من قائمة الطباعة."
+
+#. module: alfa_equipment
+#: model_terms:ir.ui.view,arch_db:alfa_equipment.maintenance_request_form_alfa
+msgid "Submit for Approval"
+msgstr "إرسال للاعتماد"
+
+#. module: alfa_equipment
+#: model_terms:ir.ui.view,arch_db:alfa_equipment.maintenance_request_form_alfa
+msgid "Approve"
+msgstr "اعتماد"
+
+#. module: alfa_equipment
+#: model_terms:ir.ui.view,arch_db:alfa_equipment.maintenance_request_form_alfa
+msgid "Reject"
+msgstr "رفض"
+
+#. module: alfa_equipment
+#: model_terms:ir.ui.view,arch_db:alfa_equipment.maintenance_request_form_alfa
+msgid "Required when rejecting"
+msgstr "مطلوب عند الرفض"
+
+#. module: alfa_equipment
+#: model_terms:ir.ui.view,arch_db:alfa_equipment.view_request_alfa_graph
+msgid "Requests per Equipment"
+msgstr "الطلبات لكل جهاز"
+
+#. module: alfa_equipment
+#: model_terms:ir.ui.view,arch_db:alfa_equipment.view_request_alfa_pivot
+#: model:ir.actions.act_window,name:alfa_equipment.action_alfa_request_analysis
+#: model:ir.ui.menu,name:alfa_equipment.menu_alfa_request_analysis
+msgid "Requests Analysis"
+msgstr "تحليل الطلبات"
+
+#. module: alfa_equipment
+#: model:ir.ui.menu,name:alfa_equipment.menu_alfa_dashboard
+msgid "Alfa Dashboard"
+msgstr "لوحة ألفا"
+
+#. module: alfa_equipment
+#: model:ir.actions.act_window,name:alfa_equipment.action_alfa_calibration_overview
+#: model:ir.ui.menu,name:alfa_equipment.menu_alfa_calibration_overview
+msgid "Calibration Overview"
+msgstr "نظرة عامة على المعايرة"
+
+#. module: alfa_equipment
+#: model:ir.actions.report,name:alfa_equipment.action_report_equipment_qr_label
+msgid "QR Label"
+msgstr "ملصق رمز QR"
+
+#. module: alfa_equipment
+#. odoo-python
+#: code:addons/alfa_equipment/models/maintenance_request.py:0
+#, python-format
+msgid "Only draft or rejected requests can be submitted."
+msgstr "يمكن إرسال الطلبات المسودة أو المرفوضة فقط."
+
+#. module: alfa_equipment
+#. odoo-python
+#: code:addons/alfa_equipment/models/maintenance_request.py:0
+#, python-format
+msgid "Please write a rejection reason before rejecting."
+msgstr "الرجاء كتابة سبب الرفض قبل رفض الطلب."
+
+#. module: alfa_equipment
+#. odoo-python
+#: code:addons/alfa_equipment/models/maintenance_request.py:0
+#, python-format
+msgid "Only maintenance managers can approve or reject requests."
+msgstr "يمكن لمدراء الصيانة فقط اعتماد الطلبات أو رفضها."
+
+#. module: alfa_equipment
+#. odoo-python
+#: code:addons/alfa_equipment/models/maintenance_request.py:0
+#, python-format
+msgid "This request must be approved before it can be closed."
+msgstr "يجب اعتماد هذا الطلب قبل إغلاقه."
+
+#. module: alfa_equipment
+#. odoo-python
+#: code:addons/alfa_equipment/models/maintenance_request.py:0
+#, python-format
+msgid "Rejected: %s"
+msgstr "مرفوض: %s"
+
+#. module: alfa_equipment
+#. odoo-python
+#: code:addons/alfa_equipment/controllers/qr_report.py:0
+#, python-format
+msgid "Fault reported: %s"
+msgstr "بلاغ عطل: %s"

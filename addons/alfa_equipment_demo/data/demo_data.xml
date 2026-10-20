@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <!-- ===== Company ===== -->
+    <record id="base.main_company" model="res.company">
+        <field name="name">Alfa Holding Group</field>
+        <field name="street">Tripoli</field>
+        <field name="city">Tripoli</field>
+        <field name="country_id" ref="base.ly"/>
+    </record>
+
+    <!-- ===== Technicians (login only, no password set) ===== -->
+    <record id="user_tech_biomed" model="res.users">
+        <field name="name">Ahmed Al-Mabrouk</field>
+        <field name="login">ahmed.biomed@alfa.example</field>
+        <field name="email">ahmed.biomed@alfa.example</field>
+        <field name="groups_id" eval="[(6, 0, [ref('base.group_user')])]"/>
+    </record>
+    <record id="user_tech_facilities" model="res.users">
+        <field name="name">Salem Ben Ali</field>
+        <field name="login">salem.facilities@alfa.example</field>
+        <field name="email">salem.facilities@alfa.example</field>
+        <field name="groups_id" eval="[(6, 0, [ref('base.group_user')])]"/>
+    </record>
+
+    <!-- ===== Maintenance teams ===== -->
+    <record id="team_biomed" model="maintenance.team">
+        <field name="name">Biomedical Engineering</field>
+        <field name="member_ids" eval="[(6, 0, [ref('user_tech_biomed')])]"/>
+    </record>
+    <record id="team_facilities" model="maintenance.team">
+        <field name="name">Facilities &amp; Industrial</field>
+        <field name="member_ids" eval="[(6, 0, [ref('user_tech_facilities')])]"/>
+    </record>
+
+    <!-- ===== Equipment categories ===== -->
+    <record id="cat_monitoring" model="maintenance.equipment.category">
+        <field name="name">Patient Monitoring &amp; Diagnostics</field>
+        <field name="technician_user_id" ref="user_tech_biomed"/>
+    </record>
+    <record id="cat_life_support" model="maintenance.equipment.category">
+        <field name="name">Life Support</field>
+        <field name="technician_user_id" ref="user_tech_biomed"/>
+    </record>
+    <record id="cat_imaging" model="maintenance.equipment.category">
+        <field name="name">Medical Imaging</field>
+        <field name="technician_user_id" ref="user_tech_biomed"/>
+    </record>
+    <record id="cat_lab" model="maintenance.equipment.category">
+        <field name="name">Laboratory</field>
+        <field name="technician_user_id" ref="user_tech_biomed"/>
+    </record>
+    <record id="cat_industrial" model="maintenance.equipment.category">
+        <field name="name">Industrial Plant</field>
+        <field name="technician_user_id" ref="user_tech_facilities"/>
+    </record>
+
+    <!-- ===== Equipment ===== -->
+    <record id="eq_ecg" model="maintenance.equipment">
+        <field name="name">ECG Machine (12-lead) CAR-01</field>
+        <field name="category_id" ref="cat_monitoring"/>
+        <field name="location">Alfa Medical Center - Cardiology</field>
+        <field name="model">CardioLine 1200</field>
+        <field name="serial_no">ECG-2210-0451</field>
+        <field name="maintenance_team_id" ref="team_biomed"/>
+        <field name="technician_user_id" ref="user_tech_biomed"/>
+        <field name="calibration_required" eval="True"/>
+        <field name="calibration_interval" eval="12"/>
+        <field name="last_calibration_date" eval="(DateTime.today() - relativedelta(months=11, days=15)).strftime('%Y-%m-%d')"/>
+    </record>
+    <record id="eq_monitor" model="maintenance.equipment">
+        <field name="name">Patient Monitor ICU-03</field>
+        <field name="category_id" ref="cat_monitoring"/>
+        <field name="location">Alfa Medical Center - ICU, Bed 3</field>
+        <field name="model">VitalView M5</field>
+        <field name="serial_no">PM-1902-3377</field>
+        <field name="maintenance_team_id" ref="team_biomed"/>
+        <field name="technician_user_id" ref="user_tech_biomed"/>
+        <field name="calibration_required" eval="True"/>
+        <field name="calibration_interval" eval="12"/>
+        <field name="last_calibration_date" eval="(DateTime.today() - relativedelta(months=3, days=0)).strftime('%Y-%m-%d')"/>
+    </record>
+    <record id="eq_vent" model="maintenance.equipment">
+        <field name="name">Ventilator ICU-01</field>
+        <field name="category_id" ref="cat_life_support"/>
+        <field name="location">Alfa Medical Center - ICU, Bed 1</field>
+        <field name="model">AirCare V600</field>
+        <field name="serial_no">VNT-2007-0912</field>
+        <field name="maintenance_team_id" ref="team_biomed"/>
+        <field name="technician_user_id" ref="user_tech_biomed"/>
+        <field name="calibration_required" eval="True"/>
+        <field name="calibration_interval" eval="6"/>
+        <field name="last_calibration_date" eval="(DateTime.today() - relativedelta(months=7, days=0)).strftime('%Y-%m-%d')"/>
+    </record>
+    <record id="eq_defib" model="maintenance.equipment">
+        <field name="name">Defibrillator ER-02</field>
+        <field name="category_id" ref="cat_life_support"/>
+        <field name="location">Alfa Medical Center - Emergency</field>
+        <field name="model">ShockSafe D300</field>
+        <field name="serial_no">DEF-2104-1180</field>
+        <field name="maintenance_team_id" ref="team_biomed"/>
+        <field name="technician_user_id" ref="user_tech_biomed"/>
+        <field name="calibration_required" eval="True"/>
+        <field name="calibration_interval" eval="6"/>
+        <field name="last_calibration_date" eval="(DateTime.today() - relativedelta(months=5, days=15)).strftime('%Y-%m-%d')"/>
+    </record>
+    <record id="eq_infusion" model="maintenance.equipment">
+        <field name="name">Infusion Pump ER-05</field>
+        <field name="category_id" ref="cat_life_support"/>
+        <field name="location">Alfa Medical Center - Emergency</field>
+        <field name="model">FlowMed IP20</field>
+        <field name="serial_no">INF-1811-2045</field>
+        <field name="maintenance_team_id" ref="team_biomed"/>
+        <field name="technician_user_id" ref="user_tech_biomed"/>
+        <field name="calibration_required" eval="True"/>
+        <field name="calibration_interval" eval="12"/>
+        <field name="last_calibration_date" eval="(DateTime.today() - relativedelta(months=13, days=0)).strftime('%Y-%m-%d')"/>
+    </record>
+    <record id="eq_xray" model="maintenance.equipment">
+        <field name="name">Digital X-Ray Unit RAD-01</field>
+        <field name="category_id" ref="cat_imaging"/>
+        <field name="location">Alfa Medical Center - Radiology</field>
+        <field name="model">ClearRay DR-900</field>
+        <field name="serial_no">XR-2201-0007</field>
+        <field name="maintenance_team_id" ref="team_biomed"/>
+        <field name="technician_user_id" ref="user_tech_biomed"/>
+        <field name="calibration_required" eval="True"/>
+        <field name="calibration_interval" eval="12"/>
+        <field name="last_calibration_date" eval="(DateTime.today() - relativedelta(months=4, days=0)).strftime('%Y-%m-%d')"/>
+    </record>
+    <record id="eq_ultrasound" model="maintenance.equipment">
+        <field name="name">Ultrasound Scanner RAD-02</field>
+        <field name="category_id" ref="cat_imaging"/>
+        <field name="location">Alfa Medical Center - Radiology</field>
+        <field name="model">SonoPro 7</field>
+        <field name="serial_no">US-2608-0219</field>
+        <field name="maintenance_team_id" ref="team_biomed"/>
+        <field name="technician_user_id" ref="user_tech_biomed"/>
+        <field name="calibration_required" eval="True"/>
+        <field name="calibration_interval" eval="12"/>
+    </record>
+    <record id="eq_analyzer" model="maintenance.equipment">
+        <field name="name">Blood Chemistry Analyzer LAB-01</field>
+        <field name="category_id" ref="cat_lab"/>
+        <field name="location">Alfa Medical Center - Laboratory</field>
+        <field name="model">ChemLab A400</field>
+        <field name="serial_no">LAB-2009-0563</field>
+        <field name="maintenance_team_id" ref="team_biomed"/>
+        <field name="technician_user_id" ref="user_tech_biomed"/>
+        <field name="calibration_required" eval="True"/>
+        <field name="calibration_interval" eval="6"/>
+        <field name="last_calibration_date" eval="(DateTime.today() - relativedelta(months=2, days=0)).strftime('%Y-%m-%d')"/>
+    </record>
+    <record id="eq_compressor" model="maintenance.equipment">
+        <field name="name">Industrial Air Compressor PA-01</field>
+        <field name="category_id" ref="cat_industrial"/>
+        <field name="location">Alfa Industrial Plant A - Workshop</field>
+        <field name="model">AeroTech 75</field>
+        <field name="serial_no">AC-1707-8812</field>
+        <field name="maintenance_team_id" ref="team_facilities"/>
+        <field name="technician_user_id" ref="user_tech_facilities"/>
+        <field name="calibration_required" eval="False"/>
+    </record>
+    <record id="eq_generator" model="maintenance.equipment">
+        <field name="name">Backup Diesel Generator 500 kVA</field>
+        <field name="category_id" ref="cat_industrial"/>
+        <field name="location">Alfa Industrial Plant A - Power Room</field>
+        <field name="model">PowerGen 500</field>
+        <field name="serial_no">GEN-1605-0031</field>
+        <field name="maintenance_team_id" ref="team_facilities"/>
+        <field name="technician_user_id" ref="user_tech_facilities"/>
+        <field name="calibration_required" eval="False"/>
+    </record>
+    <record id="eq_pump" model="maintenance.equipment">
+        <field name="name">Water Treatment Pump PB-03</field>
+        <field name="category_id" ref="cat_industrial"/>
+        <field name="location">Alfa Industrial Plant B - Water Station</field>
+        <field name="model">HydroFlow 40</field>
+        <field name="serial_no">WP-2103-4410</field>
+        <field name="maintenance_team_id" ref="team_facilities"/>
+        <field name="technician_user_id" ref="user_tech_facilities"/>
+        <field name="calibration_required" eval="False"/>
+    </record>
+
+    <!-- ===== Maintenance requests ===== -->
+    <record id="req_vent_alarm" model="maintenance.request">
+        <field name="name">Ventilator alarm triggering intermittently</field>
+        <field name="equipment_id" ref="eq_vent"/>
+        <field name="maintenance_team_id" ref="team_biomed"/>
+        <field name="user_id" ref="user_tech_biomed"/>
+        <field name="priority">3</field>
+        <field name="maintenance_type">corrective</field>
+        <field name="description">&lt;p&gt;Low-pressure alarm goes off several times per shift with no visible leak.&lt;/p&gt;</field>
+        <field name="approval_state">to_approve</field>
+        <field name="report_source">internal</field>
+    </record>
+    <record id="req_infusion_qr" model="maintenance.request">
+        <field name="name">Fault reported: Infusion Pump ER-05</field>
+        <field name="equipment_id" ref="eq_infusion"/>
+        <field name="maintenance_team_id" ref="team_biomed"/>
+        <field name="user_id" ref="user_tech_biomed"/>
+        <field name="priority">3</field>
+        <field name="maintenance_type">corrective</field>
+        <field name="description">&lt;p&gt;Occlusion alarm keeps going off even with a new line.&lt;/p&gt;</field>
+        <field name="approval_state">draft</field>
+        <field name="report_source">qr</field>
+        <field name="reported_by_name">Nurse Fatima</field>
+    </record>
+    <record id="req_ecg_paper" model="maintenance.request">
+        <field name="name">ECG paper feed jams</field>
+        <field name="equipment_id" ref="eq_ecg"/>
+        <field name="maintenance_team_id" ref="team_biomed"/>
+        <field name="user_id" ref="user_tech_biomed"/>
+        <field name="priority">1</field>
+        <field name="maintenance_type">corrective</field>
+        <field name="description">&lt;p&gt;Paper jams roughly once a day during printing.&lt;/p&gt;</field>
+        <field name="approval_state">approved</field>
+        <field name="report_source">internal</field>
+        <field name="approved_by_id" ref="base.user_admin"/>
+        <field name="approval_date" eval="(DateTime.now() - relativedelta(days=2)).strftime('%Y-%m-%d %H:%M:%S')"/>
+    </record>
+    <record id="req_xray_detector" model="maintenance.request">
+        <field name="name">Replace X-Ray detector panel</field>
+        <field name="equipment_id" ref="eq_xray"/>
+        <field name="maintenance_team_id" ref="team_biomed"/>
+        <field name="user_id" ref="user_tech_biomed"/>
+        <field name="priority">2</field>
+        <field name="maintenance_type">corrective</field>
+        <field name="description">&lt;p&gt;Image quality has degraded, with lines on the left side of the image.&lt;/p&gt;</field>
+        <field name="approval_state">rejected</field>
+        <field name="report_source">internal</field>
+        <field name="rejection_reason">Unit is still under warranty. Contact the supplier for a free replacement.</field>
+    </record>
+    <record id="req_generator_service" model="maintenance.request">
+        <field name="name">Quarterly generator service</field>
+        <field name="equipment_id" ref="eq_generator"/>
+        <field name="maintenance_team_id" ref="team_facilities"/>
+        <field name="user_id" ref="user_tech_facilities"/>
+        <field name="priority">2</field>
+        <field name="maintenance_type">preventive</field>
+        <field name="description">&lt;p&gt;Oil, filter and load test as per the quarterly plan.&lt;/p&gt;</field>
+        <field name="approval_state">approved</field>
+        <field name="report_source">internal</field>
+        <field name="approved_by_id" ref="base.user_admin"/>
+        <field name="approval_date" eval="(DateTime.now() - relativedelta(days=2)).strftime('%Y-%m-%d %H:%M:%S')"/>
+    </record>
+    <record id="req_compressor_pressure" model="maintenance.request">
+        <field name="name">Compressor pressure drop</field>
+        <field name="equipment_id" ref="eq_compressor"/>
+        <field name="maintenance_team_id" ref="team_facilities"/>
+        <field name="user_id" ref="user_tech_facilities"/>
+        <field name="priority">2</field>
+        <field name="maintenance_type">corrective</field>
+        <field name="description">&lt;p&gt;Output pressure drops below 6 bar under full load.&lt;/p&gt;</field>
+        <field name="approval_state">to_approve</field>
+        <field name="report_source">internal</field>
+    </record>
+
+    <!-- Run the daily calibration job once so statuses and reminders are ready -->
+    <function model="maintenance.equipment" name="_cron_calibration_alerts"/>
+</odoo>

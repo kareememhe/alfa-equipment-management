@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Printable QR label: Print menu on the equipment form -->
+    <record id="action_report_equipment_qr_label" model="ir.actions.report">
+        <field name="name">QR Label</field>
+        <field name="model">maintenance.equipment</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">alfa_equipment.report_equipment_qr_label</field>
+        <field name="report_file">alfa_equipment.report_equipment_qr_label</field>
+        <field name="print_report_name">'QR Label - %s' % object.name</field>
+        <field name="binding_model_id" ref="maintenance.model_maintenance_equipment"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="report_equipment_qr_label">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.basic_layout">
+                    <div class="page" style="text-align: center; padding-top: 40px;">
+                        <h2 t-field="o.name"/>
+                        <p t-if="o.location" t-field="o.location"/>
+                        <img t-if="o.qr_image" t-att-src="image_data_uri(o.qr_image)"
+                             style="width: 260px; height: 260px;"/>
+                        <h4 style="margin-top: 20px;">امسح الرمز للإبلاغ عن عطل</h4>
+                        <p>Scan to report a fault</p>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

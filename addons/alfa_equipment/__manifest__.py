@@ -1,0 +1,20 @@
+{
+    'name': 'Alfa Equipment Management',
+    'version': '18.0.1.6.0',
+    'summary': 'Calibration tracking, QR fault reporting and approvals for equipment',
+    'author': 'Kareem Arafa',
+    'category': 'Manufacturing/Maintenance',
+    'depends': ['maintenance'],
+    'data': [
+        'views/maintenance_equipment_views.xml',
+        'views/maintenance_request_views.xml',
+        'views/qr_report_templates.xml',
+        'report/equipment_qr_label.xml',
+        'views/dashboard_views.xml',
+        'data/equipment_data.xml',
+        'data/ir_cron.xml',
+    ],
+    'installable': True,
+    'application': False,
+    'license': 'LGPL-3',
+}

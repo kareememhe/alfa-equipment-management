@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- These run on install and on every upgrade -->
+    <!-- 1. Give existing equipment a QR token -->
+    <function model="maintenance.equipment" name="_alfa_ensure_qr_tokens"/>
+    <!-- 2. Recalculate calibration statuses so logic changes apply immediately -->
+    <function model="maintenance.equipment" name="_alfa_refresh_calibration_status"/>
+</odoo>

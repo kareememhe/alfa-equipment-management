@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Mobile page opened by scanning an equipment QR code (Arabic first, with English) -->
+    <template id="qr_report_page" name="Equipment Fault Report">
+        <html lang="ar" dir="rtl">
+            <head>
+                <meta charset="utf-8"/>
+                <meta name="viewport" content="width=device-width, initial-scale=1"/>
+                <title>الإبلاغ عن عطل | Report a Fault</title>
+                <style>
+                    * { box-sizing: border-box; }
+                    body { margin: 0; font-family: Tahoma, "Segoe UI", Arial, sans-serif;
+                           background: #f2f4f7; color: #1d2939; }
+                    .wrap { max-width: 480px; margin: 0 auto; padding: 20px 16px 40px; }
+                    .card { background: #fff; border-radius: 14px; padding: 20px;
+                            box-shadow: 0 2px 10px rgba(16, 24, 40, 0.08); margin-bottom: 16px; }
+                    .brand { font-size: 13px; color: #667085; margin-bottom: 4px; }
+                    h1 { font-size: 22px; margin: 0 0 4px; }
+                    .en { display: block; font-size: 12px; color: #667085; font-weight: normal; }
+                    .meta { color: #475467; font-size: 14px; margin: 4px 0 0; }
+                    label { display: block; font-weight: bold; margin: 16px 0 6px; font-size: 15px; }
+                    input, textarea, select { width: 100%; padding: 12px; font-size: 16px;
+                            border: 1px solid #d0d5dd; border-radius: 10px; font-family: inherit;
+                            background: #fff; }
+                    textarea { min-height: 120px; resize: vertical; }
+                    button { width: 100%; margin-top: 20px; padding: 14px; font-size: 17px;
+                             font-weight: bold; color: #fff; background: #1570ef; border: 0;
+                             border-radius: 10px; font-family: inherit; }
+                    .error { background: #fef3f2; color: #b42318; padding: 12px;
+                             border-radius: 10px; margin-bottom: 8px; }
+                    .success { text-align: center; }
+                    .success .tick { font-size: 48px; color: #12b76a; }
+                    .ref { font-size: 20px; font-weight: bold; margin: 8px 0; }
+                </style>
+            </head>
+            <body>
+                <div class="wrap">
+                    <div class="card">
+                        <div class="brand">نظام صيانة المعدات · Equipment Maintenance</div>
+                        <h1><t t-out="equipment.name"/></h1>
+                        <p class="meta" t-if="equipment.category_id">
+                            <t t-out="equipment.category_id.name"/>
+                        </p>
+                        <p class="meta" t-if="equipment.location">
+                            📍 <t t-out="equipment.location"/>
+                        </p>
+                    </div>
+
+                    <div class="card success" t-if="maintenance_request">
+                        <div class="tick">✓</div>
+                        <h1>تم استلام البلاغ<span class="en">Report received</span></h1>
+                        <div class="ref">#<t t-out="maintenance_request.id"/></div>
+                        <p class="meta">سيتواصل معك فريق الصيانة قريباً.<br/>
+                            The maintenance team will follow up soon.</p>
+                    </div>
+
+                    <div class="card" t-else="">
+                        <h1>الإبلاغ عن عطل<span class="en">Report a fault</span></h1>
+                        <div class="error" t-if="error">
+                            الرجاء تعبئة الاسم ووصف المشكلة.<br/>
+                            Please fill in your name and the problem description.
+                        </div>
+                        <form method="post">
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+
+                            <label for="reporter_name">الاسم<span class="en">Your name</span></label>
+                            <input id="reporter_name" name="reporter_name" type="text" required="required"
+                                   t-att-value="reporter_name or ''"/>
+
+                            <label for="description">وصف المشكلة<span class="en">What is wrong?</span></label>
+                            <textarea id="description" name="description" required="required"><t t-out="description or ''"/></textarea>
+
+                            <label for="priority">الأولوية<span class="en">Priority</span></label>
+                            <select id="priority" name="priority">
+                                <option value="1">منخفضة · Low</option>
+                                <option value="2" selected="selected">عادية · Normal</option>
+                                <option value="3">عاجلة · Urgent</option>
+                            </select>
+
+                            <button type="submit">إرسال البلاغ · Send report</button>
+                        </form>
+                    </div>
+                </div>
+            </body>
+        </html>
+    </template>
+</odoo>

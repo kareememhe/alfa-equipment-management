@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ===== Calibration overview (equipment) ===== -->
+    <record id="view_equipment_calibration_graph" model="ir.ui.view">
+        <field name="name">maintenance.equipment.calibration.graph</field>
+        <field name="model">maintenance.equipment</field>
+        <field name="priority">99</field>
+        <field name="arch" type="xml">
+            <graph string="Calibration Status" type="pie">
+                <field name="calibration_status"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="view_equipment_calibration_list" model="ir.ui.view">
+        <field name="name">maintenance.equipment.calibration.list</field>
+        <field name="model">maintenance.equipment</field>
+        <field name="priority">99</field>
+        <field name="arch" type="xml">
+            <list string="Calibration" default_order="next_calibration_date">
+                <field name="name"/>
+                <field name="category_id"/>
+                <field name="location"/>
+                <field name="last_calibration_date"/>
+                <field name="next_calibration_date"/>
+                <field name="calibration_status" widget="badge"
+                       decoration-success="calibration_status == 'ok'"
+                       decoration-warning="calibration_status == 'due_soon'"
+                       decoration-danger="calibration_status in ('overdue', 'never')"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_alfa_calibration_overview" model="ir.actions.act_window">
+        <field name="name">Calibration Overview</field>
+        <field name="res_model">maintenance.equipment</field>
+        <field name="view_mode">graph,list,form</field>
+        <field name="domain">[('calibration_required', '=', True)]</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'graph', 'view_id': ref('view_equipment_calibration_graph')}),
+            (0, 0, {'view_mode': 'list', 'view_id': ref('view_equipment_calibration_list')})]"/>
+    </record>
+
+    <!-- ===== Requests analysis ===== -->
+    <record id="view_request_alfa_graph" model="ir.ui.view">
+        <field name="name">maintenance.request.alfa.graph</field>
+        <field name="model">maintenance.request</field>
+        <field name="priority">99</field>
+        <field name="arch" type="xml">
+            <graph string="Requests per Equipment" type="bar">
+                <field name="equipment_id"/>
+                <field name="approval_state"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="view_request_alfa_pivot" model="ir.ui.view">
+        <field name="name">maintenance.request.alfa.pivot</field>
+        <field name="model">maintenance.request</field>
+        <field name="priority">99</field>
+        <field name="arch" type="xml">
+            <pivot string="Requests Analysis">
+                <field name="equipment_id" type="row"/>
+                <field name="report_source" type="col"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="action_alfa_request_analysis" model="ir.actions.act_window">
+        <field name="name">Requests Analysis</field>
+        <field name="res_model">maintenance.request</field>
+        <field name="view_mode">graph,pivot,list,form</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'graph', 'view_id': ref('view_request_alfa_graph')}),
+            (0, 0, {'view_mode': 'pivot', 'view_id': ref('view_request_alfa_pivot')})]"/>
+    </record>
+
+    <!-- ===== Menu: Maintenance > Alfa Dashboard ===== -->
+    <menuitem id="menu_alfa_dashboard" name="Alfa Dashboard"
+              parent="maintenance.menu_maintenance_title" sequence="90"
+              groups="maintenance.group_equipment_manager"/>
+    <menuitem id="menu_alfa_calibration_overview" name="Calibration Overview"
+              parent="menu_alfa_dashboard" action="action_alfa_calibration_overview" sequence="10"/>
+    <menuitem id="menu_alfa_request_analysis" name="Requests Analysis"
+              parent="menu_alfa_dashboard" action="action_alfa_request_analysis" sequence="20"/>
+</odoo>
