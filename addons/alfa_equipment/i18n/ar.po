@@ -231,3 +231,31 @@ msgstr "مرفوض: %s"
 #, python-format
 msgid "Fault reported: %s"
 msgstr "بلاغ عطل: %s"
+
+#. module: alfa_equipment
+#. odoo-python
+#: code:addons/alfa_equipment/controllers/qr_report.py:0
+#, python-format
+msgid "Photo attached by %s"
+msgstr "صورة مرفقة من %s"
+
+#. module: alfa_equipment
+#. odoo-python
+#: code:addons/alfa_equipment/models/maintenance_request.py:0
+#, python-format
+msgid "Urgent fault reported via QR: %s"
+msgstr "بلاغ عطل عاجل عبر رمز QR: %s"
+
+#. module: alfa_equipment
+#. odoo-python
+#: code:addons/alfa_equipment/models/maintenance_request.py:0
+#, python-format
+msgid "New fault reported via QR: %s"
+msgstr "بلاغ عطل جديد عبر رمز QR: %s"
+
+#. module: alfa_equipment
+#. odoo-python
+#: code:addons/alfa_equipment/models/maintenance_request.py:0
+#, python-format
+msgid "Reported by %s. Please review and approve or reject."
+msgstr "المُبلِّغ: %s. يرجى مراجعة الطلب واعتماده أو رفضه."

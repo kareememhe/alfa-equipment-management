@@ -23,6 +23,7 @@
                             border: 1px solid #d0d5dd; border-radius: 10px; font-family: inherit;
                             background: #fff; }
                     textarea { min-height: 120px; resize: vertical; }
+                    input[type="file"] { padding: 10px; background: #f9fafb; }
                     button { width: 100%; margin-top: 20px; padding: 14px; font-size: 17px;
                              font-weight: bold; color: #fff; background: #1570ef; border: 0;
                              border-radius: 10px; font-family: inherit; }
@@ -56,11 +57,19 @@
 
                     <div class="card" t-else="">
                         <h1>الإبلاغ عن عطل<span class="en">Report a fault</span></h1>
-                        <div class="error" t-if="error">
+                        <div class="error" t-if="error == 'missing'">
                             الرجاء تعبئة الاسم ووصف المشكلة.<br/>
                             Please fill in your name and the problem description.
                         </div>
-                        <form method="post">
+                        <div class="error" t-if="error == 'photo'">
+                            الملف المرفق ليس صورة.<br/>
+                            The attached file is not an image.
+                        </div>
+                        <div class="error" t-if="error == 'photo_size'">
+                            الصورة كبيرة جداً (الحد الأقصى 10 ميغابايت).<br/>
+                            The photo is too large (maximum 10 MB).
+                        </div>
+                        <form method="post" enctype="multipart/form-data">
                             <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
 
                             <label for="reporter_name">الاسم<span class="en">Your name</span></label>
@@ -76,6 +85,9 @@
                                 <option value="2" selected="selected">عادية · Normal</option>
                                 <option value="3">عاجلة · Urgent</option>
                             </select>
+
+                            <label for="photo">صورة للمشكلة (اختياري)<span class="en">Photo of the problem (optional)</span></label>
+                            <input id="photo" name="photo" type="file" accept="image/*"/>
 
                             <button type="submit">إرسال البلاغ · Send report</button>
                         </form>
